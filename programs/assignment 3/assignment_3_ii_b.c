@@ -4,6 +4,7 @@
     (b) Find a double root of the above equation which lies in [-3.5, -2.5].
 
     Output:
+    Root finding by Newton-Raphson Method
     Enter initial approximation of the root: -3.4
     Enter the multiplicity of the root: 2
 
@@ -37,6 +38,7 @@ int main()
     int m = 2;
     double x = 0, error = 0.0000001;
 
+    printf("Root finding by Newton-Raphson Method\n");
     printf("Enter initial approximation of the root: ");
     scanf("%lf", &x);
     printf("Enter the multiplicity of the root: ");

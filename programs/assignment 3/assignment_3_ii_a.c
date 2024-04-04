@@ -4,6 +4,7 @@
     (a) Find a root of the above equation which lies in [2.5, 3.5].
 
     Output:
+    Root finding by Newton-Raphson Method
     Enter initial approximation of the root: 2.7
 
     x        f(x)
@@ -36,6 +37,7 @@ int main()
 {
     double x = 0, error = 0.0000001;
 
+    printf("Root finding by Newton-Raphson Method\n");
     printf("Enter initial approximation of the root: ");
     scanf("%lf", &x);
 

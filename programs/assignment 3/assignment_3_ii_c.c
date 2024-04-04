@@ -5,6 +5,7 @@
     them has the initial value 1.4299 + 3.1520 i
 
     Output:
+    Root finding by Newton-Raphson Method
     Enter initial approximation of the root
     Enter the real part: 1.4299
     Enter the imaginary part: 2.1520
@@ -44,6 +45,7 @@ int main()
     double complex z;
     double error = 0.0000001;
 
+    printf("Root finding by Newton-Raphson Method\n");
     printf("Enter initial approximation of the root\n");
     printf("Enter the real part: ");
     scanf("%lf", &x);

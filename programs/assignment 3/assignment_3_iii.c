@@ -4,6 +4,7 @@
 	where R is the last digit of your university roll number.
 
 	Output:
+    Root finding by Secant Method
 	Input two initial approximations of the root: 1 5
 
 	x 		 f(x)
@@ -31,6 +32,7 @@ int main()
 {
     double x0 = 0, x1 = 1, x, error = 0.0000001;
 
+    printf("Root finding by Secant Method\n");
     printf("Input two initial approximations of the root: ");
     scanf("%lf%lf", &x0, &x1);
     printf("\n");

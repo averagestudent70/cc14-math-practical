@@ -5,6 +5,7 @@
     roll number.
 
     Output:
+    Root finding by Bisection Method
     Input the root containing interval
     The lower bound: 0
     The upper bound: 2
@@ -47,12 +48,20 @@ int main()
 {
     double a0 = 0, b0 = 1, a, b, x, error = 0.00001;
 
+    printf("Root finding by Bisection Method\n");
+
     printf("Input the root containing interval\n");
     printf("The lower bound: ");
     scanf("%lf", &a0);
     printf("The upper bound: ");
     scanf("%lf", &b0);
     printf("\n");
+
+    if (f(a0) * f(b0) > 0)
+    {
+        printf("The interval (%f, %f) contains no root.\n", a0, b0);
+        return 0;
+    }
 
     a = a0;
     b = b0;
