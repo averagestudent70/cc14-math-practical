@@ -11,8 +11,6 @@
 
     Output:
 	Solution of system of linear equations by Gauss Siedel Method
-	Enter the number of equations present: 4
-	Enter the number of unknowns: 4
 
 	The system must be diagonally dominant.
     Enter the coefficients of the system:
@@ -34,17 +32,17 @@
     Root 2: 0.6988
     Root 3: -1.5399
     Root 4: 1.8432
-
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
 #define N 10
 
 int main()
 {
-	int n_eq = 4, n_var = 4; 	// n_equations, n_unknowns
+	int n = 4;
 	double a[N][N] = {0}, b[N] = {0};
 	double x0[N] = {0}, x1[N] = {0};
 	double error = 0.0000001;
@@ -52,29 +50,27 @@ int main()
 
 	printf("Solution of system of linear equations by Gauss Siedel Method\n");
 	printf("Enter the number of equations present: ");
-	scanf("%d", &n_eq);
-	printf("Enter the number of unknowns: ");
-	scanf("%d", &n_var);
+	scanf("%d", &n);
 	printf("\n");
 
-	if (n_eq > N || n_var > N)
+	if (n > N)
 	{
-		printf("Too many variables or unknowns.\n");
-		return -1;
+		printf("Too many equations\n");
+		exit(EXIT_FAILURE);
 	}
 
 	printf("The system must be diagonally dominant.\n");
 	printf("Enter the coefficients of the system:\n");
-	for (int i = 0; i < n_eq; i++)
-		for (int j = 0; j < n_var; j++)
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
 			scanf("%lf", &a[i][j]);
 
 	printf("\nEnter the right-hand side of the system: ");    
-	for (int i = 0; i < n_eq; i++)
+	for (int i = 0; i < n; i++)
 		scanf("%lf", &b[i]);
 
 	printf("\nEnter initial approximation of the roots:\n");
-	for (int i = 0; i < n_var; i++)
+	for (int i = 0; i < n; i++)
 	{
 		printf("Root %d: ", i+1);
 		scanf("%lf", &x0[i]);
@@ -83,20 +79,27 @@ int main()
 
 	while (flag == false)
 	{
-		for (int i = 0; i < n_eq; i++)
+		for (int i = 0; i < n; i++)
 		{
 			x1[i] = b[i];
-			for (int j = 0; j < n_var; j++)
+			for (int j = 0; j < n; j++)
+			{
 				if (j < i)
                     x1[i] = x1[i] - a[i][j]*x1[j];
                 else if (j > i)
                     x1[i] = x1[i] - a[i][j]*x0[j];
+			}
 
-			// a[i][i] is never zero, as the system is strictly diagonal dominant
+			if (a[i][i] == 0)
+			{
+				printf("The coefficient matrix must be diagonally dominant\n");
+				printf("A[%d][%d] is zero\n", i, i);
+				exit(EXIT_FAILURE);
+			}
 			x1[i] /= a[i][i];		
 		}
 
-		for (int i = 0; i < n_var; i++)
+		for (int i = 0; i < n; i++)
 		{
 			if (fabs(x1[i]-x0[i]) < error)
 				flag = true;
@@ -105,7 +108,7 @@ int main()
 	}
 
 	printf("The solution for the given system correct to 4D is:\n");
-	for (int i = 0; i < n_var; i++)
+	for (int i = 0; i < n; i++)
 		printf("Root %d: %.4f\n", i+1, x0[i]);
     printf("\n");
 
