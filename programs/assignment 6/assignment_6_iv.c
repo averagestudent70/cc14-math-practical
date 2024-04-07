@@ -3,7 +3,7 @@
     int_1.1 ^3.3 (e^(0.03 * sin(x)) / (x^2 + 0.0009)) dx
 
     Output:
-    Integration by 6 point Gauss Quadrature Rule
+    Integration by Gauss Quadrature Rule
     Enter limits of integration
     Lower limit: 1.1
     Upper limit: 3.3
@@ -37,7 +37,7 @@ int main()
     double u[MAX_LEN] = {0}, w[MAX_LEN] = {0};
     double I = 0, a = 1.1, b = 3.3;
 
-    printf("Integration by 6 point Gauss Quadrature Rule\n");
+    printf("Integration by Gauss Quadrature Rule\n");
     printf("Enter limits of integration\n");
     printf("Lower limit: ");
     scanf("%lf", &a);
