@@ -14,7 +14,7 @@
 
     Enter 8 values of x: 2.5  3.5  4.5  5.5  6.5  7.5  8.5  9.5
     Enter 8 values of y: 1.465  1.685  1.715  1.765  1.775  1.855  1.885  1.975
-    The polynomial is: (1.4079)  + (0.0595)*x^1
+    The polynomial is: 1.4079  + 0.0595*x^1
 */
 
 #include <stdio.h>
@@ -23,15 +23,24 @@
 #define N 15
 #define M 10
 
-void to_upper_triangular(double a[][M+1+1], int num_eq, int num_var)
+/*
+    Converts a n*n matrix into an upper triangular matrix
+    exit(EXIT_FAILURE) if the diagonal elements are zero.
+*/
+void to_upper_triangular(double a[][M+1+1], int n)
 {
-    for (int k = 0; k < num_eq; k++)
+    for (int k = 0; k < n; k++)
     {
-        for (int i = k+1; i < num_eq; i++)
+        for (int i = k+1; i < n; i++)
         {
-            // a[k][k] is never zero, as the system is strictly diagonal dominant ??
+            if (a[k][k] == 0)
+            {
+                printf("The diagonal elements must be numerically largest\n");
+                printf("a[%d][%d] is zero\n", k, k);
+                exit(EXIT_FAILURE);
+            }
             double m = a[i][k]/a[k][k];
-            for (int j = k; j < num_var+1; j++)
+            for (int j = k; j < n+1; j++)
                 a[i][j] = a[i][j] - m * a[k][j];
         }
     }
@@ -41,17 +50,18 @@ void to_upper_triangular(double a[][M+1+1], int num_eq, int num_var)
     a must be augmented upper triangular matrix.
     exit(EXIT_FAILURE) if a[i][i] == 0
 */
-void back_substitute(double a[][M+1+1], double x[], int num_eq, int num_var)
+void back_substitute(double a[][M+1+1], double x[], int n)
 {
-    for (int i = num_eq-1; i >= 0; i--)
+    for (int i = n-1; i >= 0; i--)
     {
-        double root = a[i][num_var];
-        for (int j = i+1; j < num_var; j++)
+        double root = a[i][n];
+        for (int j = i+1; j < n; j++)
             root = root - a[i][j]*x[j];
         
         if (a[i][i] == 0)
         {
-            printf("Cannot divide by zero as A[%d][%d] is very close to 0\n", i, i);
+            printf("The diagonal elements must be numerically largest\n");
+            printf("a[%d][%d] is zero\n", i, i);
             exit(EXIT_FAILURE);
         }
         x[i] = root / a[i][i];
@@ -103,8 +113,8 @@ int main()
     }
 
     // finding coefficients using Gaussian elimination
-    to_upper_triangular(a, num_eqn, num_eqn);
-    back_substitute(a, coeff, num_eqn, num_eqn);
+    to_upper_triangular(a, num_eqn);
+    back_substitute(a, coeff, num_eqn);
 
     printf("The polynomial is: ");
     for (int i = 0; i < m+1; i++)
