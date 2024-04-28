@@ -17,6 +17,7 @@
     Interpolation using Lagrange's fourmula
     Enter the number of points: 8
 
+
     Enter the points:
     1 x: 1.12
       y: 0.307961
@@ -25,7 +26,7 @@
     3 x: 1.20
       y: 0.321976
     4 x: 1.26
-      y: 0.334317
+      y: 0.334217
     5 x: 1.32
       y: 0.342368
     6 x: 1.37
@@ -36,7 +37,7 @@
       y: 0.381982
 
     Enter the value for which interpolation is required: 1.2249999
-    The functional value at x = 1.225000 is 0.328487
+    The functional value at x = 1.225000 is 0.328428
 
     Output 2:
     Interpolation using Lagrange's fourmula
@@ -44,24 +45,24 @@
     
     Enter the points:
     1 x: 1.12
-    y: 0.307961
+      y: 0.307961
     2 x: 1.16
-    y: 0.311448
+      y: 0.311448
     3 x: 1.20
-    y: 0.321976
+      y: 0.321976
     4 x: 1.26
-    y: 0.334317
+      y: 0.334217
     5 x: 1.32
-    y: 0.342368
+      y: 0.342368
     6 x: 1.37
-    y: 0.357905
+      y: 0.357905
     7 x: 1.43
-    y: 0.370674
+      y: 0.370674
     8 x: 1.49
-    y: 0.381982
+      y: 0.381982
 
     Enter the value for which interpolation is required: 1.415
-    The functional value at x = 1.415000 is 0.370046
+    The functional value at x = 1.415000 is 0.370010
 */
 
 #include <stdio.h>
@@ -101,6 +102,7 @@ int main()
     {
         double prod = 1;
         for (int j = 0; j < n; j++)
+        {
             if (i != j)
             {
                 if (x[i] == x[j])
@@ -110,7 +112,8 @@ int main()
                     exit(EXIT_FAILURE);
                 }
                 prod *= (x_inter - x[j]) / (x[i] - x[j]);
-            }        
+            }
+        }  
         y_inter += prod * y[i];
     }
 
