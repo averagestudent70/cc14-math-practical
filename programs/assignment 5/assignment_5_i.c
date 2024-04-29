@@ -17,7 +17,6 @@
     Interpolation using Lagrange's fourmula
     Enter the number of points: 8
 
-
     Enter the points:
     1 x: 1.12
       y: 0.307961
@@ -86,7 +85,7 @@ int main()
     }
     printf("\n");
     
-    printf("\nEnter the points:\n");
+    printf("Enter the points:\n");
     for(int i = 0; i < n; i++)
     {
         printf("%d x: ", i+1);
