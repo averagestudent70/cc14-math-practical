@@ -25,6 +25,7 @@
 
 /*
     Converts a n*n matrix into an upper triangular matrix
+    The matrix a must be an augmented matrix
     exit(EXIT_FAILURE) if the diagonal elements are zero.
 */
 void to_upper_triangular(double a[][M+1+1], int n)
