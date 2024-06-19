@@ -30,7 +30,7 @@
 #define N 10
 
 /*
-    Computes the maximum of the absolute values of the 'n' entries in 'x'.
+    Computes the maximum of the absolute values of the `n` entries in `x`.
 */
 double abs_max(double x[], int n)
 {
@@ -43,13 +43,13 @@ double abs_max(double x[], int n)
 }
 
 /*
-    Returns the dominant eigenvalue of the matrix a(n*n)
-    with initial approximation of eigenvector in x
-    Put i=1..n(x_i=1) for the approximation eigenvector
+    Returns the dominant eigenvalue of the matrix `a(n*n)`
+    Pass the initial approximation of eigenvector in `x`
+    Put `x_i=1, i=1...n` for the approximation eigenvector
 */
 double dom_eigenvalue(double a[][N], double x[], int n)
 {
-    double x1[N], l;
+    double x1[N], l, error = 1E-10;
     bool accurate;
 
     do
@@ -71,7 +71,7 @@ double dom_eigenvalue(double a[][N], double x[], int n)
         for (int j = 0; j < n; j++)
         {
             // keeps accurate to true only if all x[j]'s are close to x1[j]
-            if (fabs(x1[j] - x[j]) > 1E-10)
+            if (fabs(x1[j] - x[j]) > error)
                 accurate = false;
             x[j] = x1[j];
         }

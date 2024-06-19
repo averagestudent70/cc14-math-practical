@@ -129,7 +129,7 @@ void inverse_matrix(double a[][N], double b[][N], int n)
 */
 double dom_eigenvalue(double a[][N], double x[], int n)
 {
-    double x1[N], l;
+    double x1[N], l, error = 1E-10;
     bool accurate;
 
     do
@@ -151,7 +151,7 @@ double dom_eigenvalue(double a[][N], double x[], int n)
         for (int j = 0; j < n; j++)
         {
             // keeps accurate to true only if all x[j]'s are close to x1[j]
-            if (fabs(x1[j] - x[j]) > 1E-10)
+            if (fabs(x1[j] - x[j]) > error)
                 accurate = false;
             x[j] = x1[j];
         }
